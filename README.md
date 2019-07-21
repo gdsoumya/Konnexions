@@ -7,7 +7,10 @@
 1. USB Flash Drive
 2. Smartphone for creating Hotspot (not compulsory)
 ## Installation
-Follow this [Youtube Tutorial](https://www.youtube.com/watch?v=zE3EhEJYQ-I) to install Kali Linux on VirtualBox.
+1. [Youtube Tutorial](https://www.youtube.com/watch?v=zE3EhEJYQ-I) to install Kali Linux in VirtualBox.
+2. Kali Regular Repo : **`deb http://http.kali.org/kali kali-rolling main non-free contrib`**
+3. Make sure your **/etc/apt/sources.list** has the above entry, if it doesn't add it and save the file.
+
 ## Resources
 1. [Introduction to Ethical Hacking](http://wiki.cas.mcmaster.ca/index.php/Ethical_Hacking)
 2. [Basic Kali Linux Commands](https://github.com/gdsoumya/Konnexions/blob/master/Kali-Linux_Command_List.txt)
