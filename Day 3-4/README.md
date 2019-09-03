@@ -63,8 +63,8 @@ the target that reveals the nature of the service.
 
 1. Nmap Version : <br/>`nmap -P0 -p <port> -sI <zombie IP> <target IP>`
 2. HPing3: <br/>
-`hping3 -S <zombie>
-hping3 --spoof <zombie> -S <target> -p <port> -c 1
+`hping3 -S <zombie> <br/>
+hping3 --spoof <zombie> -S <target> -p <port> -c 1 <br/>
 hping3 -S <zombie>`
 
 ### Further Reading
