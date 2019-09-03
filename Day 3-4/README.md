@@ -1,9 +1,10 @@
 # Day 3-4 [Scanning and Enumeration]
 
-### Setting up NAT Network in Virtual Box
-
-1. VBoxManage natnetwork add --netname Konnexions --network "10.20.14.0/24" --enable
-2. VBoxManage dhcpserver add --netname Konnexions --ip 10.20.14.3 --netmask 255.255.255.0 --lowerip 10.20.14.200 --upperip 10.20.14.250 --enable
+### Setting up NAT Network in Virtual Box (Optional)
+```sh
+VBoxManage natnetwork add --netname Konnexions --network "10.20.14.0/24" --enable
+VBoxManage dhcpserver add --netname Konnexions --ip 10.20.14.3 --netmask 255.255.255.0 --lowerip 10.20.14.200 --upperip 10.20.14.250 --enable
+```
 
 ## SCANNING
 
@@ -61,11 +62,16 @@ the target that reveals the nature of the service.
 
 ### Idle Scan Hands On
 
-1. Nmap Version : <br/>`nmap -P0 -p <port> -sI <zombie IP> <target IP>`
-2. HPing3: <br/>
-`hping3 -S <zombie> <br/>
-hping3 --spoof <zombie> -S <target> -p <port> -c 1 <br/>
-hping3 -S <zombie>`
+1. Nmap Version :
+```sh
+nmap -P0 -p <port> -sI <zombie IP> <target IP>
+```
+2. HPing3: 
+```sh
+hping3 -S <zombie> 
+hping3 --spoof <zombie> -S <target> -p <port> -c 1
+hping3 -S <zombie>
+```
 
 ### Further Reading
 
