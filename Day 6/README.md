@@ -1,4 +1,4 @@
-#Day 6 (Web Application Penetration Testing)
+# Day 6 (Web Application Penetration Testing)
 
 ### What is Web Application Penetration Testing?
 
